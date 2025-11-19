@@ -1,13 +1,26 @@
+'use client'
+
+import { useEffect, useState } from 'react';
 import { TodoType } from "../types/todo.types";
 import { fetchTodos } from "../lib/fetchTodos";
+import { deleteTodo } from "../lib/deleteTodo";
 
-// const todos: TodoType[] = [
-//     { id: 1, description: "Buy groceries", completed: false, priority: 'medium' },
-//     { id: 2, description: "Wash the car", completed: true, priority: 'low'},
-// ];
+export default function ToDosPage() {
+    const [todos, setTodos] = useState<TodoType[]>([]);
+    
+    useEffect(() => {
+        fetchTodos().then(setTodos).catch(console.error);
+    }, []);
 
-export default async function ToDosPage() {
-    const todos: TodoType[] = await fetchTodos();
+    const handleDelete = async (id: number) => {
+        try {
+            await deleteTodo(id);
+            setTodos(prev => prev.filter(todo => todo.id !== id));
+        } catch(err) {
+            console.error('Delete failed: ', err);
+        }
+    };
+
     return (
         <div>
             <p>ToDos Page</p>
@@ -15,7 +28,15 @@ export default async function ToDosPage() {
             <ul>
                 {todos.map(todo => (
                     <li key={todo.id}>
-                        {todo.description} - {todo.completed ? 'Completed' : 'Pending'} - Priority: {todo.priority}
+                        <span>
+                            {todo.description} - {todo.completed ? 'Completed' : 'Pending'} - Priority: {todo.priority}
+                        </span>
+                        <button
+                            onClick={() => handleDelete(todo.id)}
+                            style={{ marginLeft: '1rem', color: 'red' }}
+                        >
+                            Delete
+                        </button>
                     </li>
                 ))}
             </ul>
