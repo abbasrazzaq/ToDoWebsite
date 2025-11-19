@@ -1,6 +1,7 @@
+import { API_BASE_URL } from "./config";
+
 export async function fetchTodos() {
-    // TODO: Remove hardcoded url
-    const res = await fetch('http://localhost:3000/todos', {
+    const res = await fetch(`${API_BASE_URL}/todos`, {
         next: { revalidate: 0 }
     });
 
