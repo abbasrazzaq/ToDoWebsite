@@ -16,6 +16,13 @@ export class TodosService {
         return this.todos;
     }
 
+    findOne(id: number): TodoType {
+        const todo = this.todos.find(t => t.id === id);
+        if (!todo) throw new NotFoundException('Todo not found');
+
+        return todo;
+    }
+
     create(createTodoDto : CreateTodoDto): TodoType {
         const newTodo: TodoType = {
             id: this.idCounter++,

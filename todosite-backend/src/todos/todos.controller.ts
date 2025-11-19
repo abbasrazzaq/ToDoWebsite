@@ -13,6 +13,11 @@ export class TodosController {
         return this.todosService.findAll();
     }
 
+    @Get(':id')
+    getTodoById(@Param('id', ParseIntPipe) id: number): TodoType {
+        return this.todosService.findOne(id);
+    }
+
     @Post()
     createTodo(@Body() dto: CreateTodoDto): TodoType {
         return this.todosService.create(dto);
