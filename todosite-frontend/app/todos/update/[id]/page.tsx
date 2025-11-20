@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { fetchTodoById } from '@/app/lib/fetchTodoById';
 import { updateTodo } from '@/app/lib/updateTodo';
 import type { TodoType } from '@types/todo.types';
+import styles from '../../TodoStyles.module.css';
 
 export default function UpdateTodoPage() {
     const router = useRouter();
@@ -37,26 +38,31 @@ export default function UpdateTodoPage() {
     if (!todo) return <p>Loading...</p>
 
     return (
-        <main>
-            <h1>Update Todo</h1>
-            <form onSubmit={handleSubmit}>
+        <main className={styles.container}>
+            <h1 className={styles.heading}>
+                Update the Todo
+            </h1>
+
+            <form onSubmit={handleSubmit} className={styles.form}>
                 <input
                     type="text"
                     value={todo.description}
                     onChange={e => setTodo({ ...todo, description: e.target.value })}
                     required 
+                    className={styles.input}
                 />
 
                 <select
                     value={todo.priority}
                     onChange={e => setTodo({ ...todo, priority: e.target.value as any})}
+                    className={styles.select}
                 >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                 </select>
 
-                <label>
+                <label className={styles.checkboxLabel}>
                     <input
                         type="checkbox"
                         checked={todo.completed}
@@ -65,8 +71,14 @@ export default function UpdateTodoPage() {
                     Completed
                 </label>
 
-                <button type="submit">Update</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <button 
+                    type="submit"
+                    className={styles.button}
+                >
+                    Update
+                </button>
+                {/* TODO: Cancel button: include are you sure? */}
+                {error && <p className={styles.error}>{error}</p>}
             </form>
         </main>
     );

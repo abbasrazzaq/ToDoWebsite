@@ -1,0 +1,71 @@
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    font-family: sans-serif;
+}
+
+.heading {
+    text-align: center;
+}
+
+.todoList {
+    list-style: none;
+    padding: 0;
+}
+
+.todoItem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.5rem 1.5rem;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.todoItem > span {
+  grid-column: 1 / -1;
+  line-height: 1.6;
+}
+
+.todoItem > div {
+  grid-column: 2;
+  justify-self: end;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.todoItem > span {
+  padding-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+
+.status {
+    color: green;
+}
+
+.status.pending {
+    color: orange;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.update {
+    background: #0070f3;
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.delete {
+    background: #e00;
+    color: white;
+}
