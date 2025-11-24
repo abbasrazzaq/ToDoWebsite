@@ -1,5 +1,5 @@
 import { API_BASE_URL } from './config';
-import type { TodoType } from '@types/todo.types';
+import type { TodoType } from '../types/todo.types';
 
 type UpdateTodoInput = Partial<Omit<TodoType, 'id'>>;
 

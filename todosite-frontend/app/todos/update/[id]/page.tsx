@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { fetchTodoById } from '@/app/lib/fetchTodoById';
 import { updateTodo } from '@/app/lib/updateTodo';
-import type { TodoType } from '@types/todo.types';
+import type { TodoType } from '@/app/types/todo.types';
 import styles from '../../TodoStyles.module.css';
 
 export default function UpdateTodoPage() {

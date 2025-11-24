@@ -1,5 +1,5 @@
 import { API_BASE_URL } from './config';
-import type { TodoType } from '@types/todo.types';
+import type { TodoType } from '../types/todo.types';
 
 export async function fetchTodoById(id: number): Promise<TodoType> {
     const res = await fetch(`${API_BASE_URL}/todos/${id}`, {
