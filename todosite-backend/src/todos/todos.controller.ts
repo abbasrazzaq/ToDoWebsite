@@ -14,7 +14,7 @@ export class TodosController {
     }
 
     @Get(':id')
-    getTodoById(@Param('id', ParseIntPipe) id: number): TodoType {
+    async getTodoById(@Param('id', ParseIntPipe) id: number): Promise<TodoType> {
         return this.todosService.findOne(id);
     }
 
@@ -24,15 +24,15 @@ export class TodosController {
     }
 
     @Patch(':id')
-    updateTodo(
+    async updateTodo(
         @Param('id', ParseIntPipe) id: number,
         @Body() dto: UpdateTodoDto
-    ): TodoType {
-        return this.todosService.update(id, dto)
+    ): Promise<TodoType> {
+         return this.todosService.update(id, dto)
     }
 
     @Delete(':id')
-    deleteTodo(@Param('id', ParseIntPipe) id: number): void {
+    async deleteTodo(@Param('id', ParseIntPipe) id: number): Promise<void> {
         this.todosService.delete(id);
     }
 }
