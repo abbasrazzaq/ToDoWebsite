@@ -9,7 +9,7 @@ export class TodosController {
     constructor(private readonly todosService: TodosService) {}
 
     @Get()
-    getTodos(): TodoType[] {
+    async getTodos(): Promise<TodoType[]> {
         return this.todosService.findAll();
     }
 
@@ -19,7 +19,7 @@ export class TodosController {
     }
 
     @Post()
-    createTodo(@Body() dto: CreateTodoDto): TodoType {
+    async createTodo(@Body() dto: CreateTodoDto): Promise<TodoType> {
         return this.todosService.create(dto);
     }
 
