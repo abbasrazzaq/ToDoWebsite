@@ -2,11 +2,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Next.js: debug client-side",
+      "name": "Next.js: debug frontend",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000"
     },
+    // TODO: Attaching of the debugger doesn't work for frontend so have to run npm run dev in terminal before running ts debug action
+    // {
+    //   "name": "Next.js: debug frontend",
+    //   "type": "node",
+    //   "request": "launch",
+    //   "runtimeExecutable": "npm",
+    //   "runtimeArgs": ["run", "dev"],
+    //   "cwd": "${workspaceFolder}/todosite-frontend",
+    //   "console": "integratedTerminal",
+    //   "serverReadyAction": {
+    //     "pattern": "started server on .+, url: (https?://\\.+)",
+    //     "uriFormat": "%s"
+    //   }
+    // },
     {
       "name": "Nest.js debug server-side",
       "type": "node",
@@ -24,5 +38,15 @@
     //   "request": "launch",
     //   "url": "http://localhost:3001"
     // }
+  ]
+  ,
+  "compounds": [
+    {
+      "name": "Full stack debug",
+      "configurations": [
+        "Next.js: debug frontend",
+        "Nest.js debug server-side"
+      ]
+    }
   ]
 }
