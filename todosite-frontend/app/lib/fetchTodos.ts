@@ -1,13 +1,8 @@
-import { API_BASE_URL } from "./config";
+import { apiFetch } from './apiFetch';
+import type { TodoType } from '../types/todo.types'
 
-export async function fetchTodos() {
-    const res = await fetch(`${API_BASE_URL}/todos`, {
-        next: { revalidate: 0 }
+export async function fetchTodos(): Promise<TodoType[]> {
+    return await apiFetch<TodoType[]>('/todos', {
+        method: 'GET',
     });
-
-    if(!res.ok) {
-        throw new Error('Failed to fetch todos');
-    }
-
-    return res.json();
 }

@@ -1,11 +1,8 @@
 import { API_BASE_URL } from './config';
+import { apiFetch } from './apiFetch';
 
 export async function deleteTodo(id: number): Promise<void> {
-    const res = await fetch(`${API_BASE_URL}/todos/${id}`, {
+    await apiFetch<void>(`/todos/${id}`, {
         method: 'DELETE',
     });
-
-    if (!res.ok) {
-        throw new Error('Failed to delete todo');
-    }
 }

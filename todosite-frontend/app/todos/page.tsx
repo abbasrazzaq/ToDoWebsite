@@ -12,7 +12,11 @@ export default function ToDosPage() {
     const router = useRouter();
     
     useEffect(() => {
-        fetchTodos().then(setTodos).catch(console.error);
+        fetchTodos().then(
+            v => setTodos(v)
+        ).catch(
+            console.error
+        );
     }, []);
 
     const handleUpdate = async (id: number) => {
