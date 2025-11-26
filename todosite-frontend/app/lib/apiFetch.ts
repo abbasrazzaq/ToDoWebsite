@@ -2,7 +2,9 @@ import { API_BASE_URL } from './config';
 
 type ApiFetchOptions = RequestInit;
 
-export async function apiFetch<T = any>(path: string, options: ApiFetchOptions = {}): Promise<T> {
+export async function apiFetch<T = any>(path: string, 
+    options: ApiFetchOptions = { method: 'GET' }
+): Promise<T> {
     const { headers, ...rest } = options;
 
     const mergedHeaders = new Headers(headers as HeadersInit);
