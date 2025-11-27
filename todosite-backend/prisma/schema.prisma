@@ -13,10 +13,17 @@ datasource db {
   provider = "postgresql"
 }
 
+model Priority {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  todos   Todo[]
+}
+
 model Todo {
-  id            Int     @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   description   String
-  completed     Boolean @default(false)
-  priority      String @default("medium")
-  createdAt     DateTime @default(now()) 
+  completed     Boolean   @default(false)
+  priorityId    Int?
+  priority      Priority?  @relation(fields: [priorityId], references: [id])
+  createdAt     DateTime  @default(now()) 
 }
