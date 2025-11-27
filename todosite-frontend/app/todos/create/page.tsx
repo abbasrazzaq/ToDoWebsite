@@ -8,8 +8,14 @@ import styles from '../TodoStyles.module.css'
 export default function CreateTodoPage() {
     const router = useRouter();
 
+    // Get priorities from server (id & name)
+    // Populate dropdown from the values.
+    // Pass up id only on create
+
+    
     const [description, setDescription] = useState('');
-    const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('medium');
+    //const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('medium');
+    const [priorityId, setPriorityId] = useState<number>(1);
     const [completed, setCompleted] = useState(false);
     const [error, setError] = useState('');
 
@@ -17,7 +23,7 @@ export default function CreateTodoPage() {
         e.preventDefault();
 
         try {
-            await createTodo({ description, priority, completed });
+            await createTodo({ description, priorityId, completed });
             router.push('/todos');
 
         } catch(err) {
@@ -44,13 +50,13 @@ export default function CreateTodoPage() {
                 />
 
                 <select 
-                    value={priority} 
-                    onChange={e => setPriority(e.target.value as any)}
+                    value={priorityId} 
+                    onChange={e => setPriorityId(Number(e.target.value))}
                     className={styles.select}
                 >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option value={1}>Low</option>
+                    <option value={2}>Medium</option>
+                    <option value={3}>High</option>
                 </select>
 
                 <label className={styles.checkboxLabel}>

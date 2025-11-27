@@ -16,7 +16,9 @@ export default function UpdateTodoPage() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        fetchTodoById(id).then(setTodo).catch(err => setError(err.message));
+        fetchTodoById(id).then(
+            v => setTodo(v)
+        ).catch(err => setError(err.message));
     }, [id]);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -26,7 +28,7 @@ export default function UpdateTodoPage() {
         try {
             await updateTodo(id, {
                 description: todo.description,
-                priority: todo.priority,
+                priorityId: todo.priorityId,
                 completed: todo.completed,
             });
             router.push('/todos');
@@ -53,13 +55,13 @@ export default function UpdateTodoPage() {
                 />
 
                 <select
-                    value={todo.priority}
-                    onChange={e => setTodo({ ...todo, priority: e.target.value as any})}
+                    value={todo.priorityId}
+                    onChange={e => setTodo({ ...todo, priorityId: Number(e.target.value)})}
                     className={styles.select}
                 >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option value={1}>Low</option>
+                    <option value={2}>Medium</option>
+                    <option value={3}>High</option>
                 </select>
 
                 <label className={styles.checkboxLabel}>
