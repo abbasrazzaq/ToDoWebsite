@@ -38,12 +38,6 @@ export class TodosService {
     }
 
     async create(createTodoDto: CreateTodoDto): Promise<TodoType> {
-        // Look up priorityId by name
-        // const priority = await this.prismaService.priority.findUnique({
-        //     where: { name: createTodoDto.priority },
-        // });
-        // if (!priority) throw new NotFoundException('Priority not found');
-
         const createdTodo = await this.prismaService.todo.create({
             data: {
                 description: createTodoDto.description,
@@ -56,22 +50,12 @@ export class TodosService {
     }
 
     async update(id: number, updateDto: Partial<UpdateTodoDto>): Promise<TodoType> {
-        // let priorityId: number | undefined;
-        // if (updateDto.priority) {
-        //     const priority = await this.prismaService.priority.findUnique({
-        //         where: { name: updateDto.priority}
-        //     });
-        //     if (!priority) throw new NotFoundException('Priority not found');
-        //     priorityId = priority.id;
-        // }
-
         const updatedTodo = await this.prismaService.todo.update({
             where: { id },
             data: {
                 description: updateDto.description,
                 completed: updateDto.completed,
                 priorityId: updateDto.priorityId,
-                //... (priorityId && { priorityId }),
             },
             include: { priority: true },
         });
